@@ -17,8 +17,14 @@ RUN apt-get install -y ansible
 COPY install-composer.sh /root/install-composer.sh
 RUN sh /root/install-composer.sh
 
+# install unzip to be used with composer
+RUN apt-get install -y unzip
+
 # install npm & gulp
 RUN apt-get install -y npm
 RUN npm install -g gulp
+
+# oh, we need git too...
+RUN apt-get install -y git
 
 # done
