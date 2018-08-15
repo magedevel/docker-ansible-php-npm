@@ -17,4 +17,8 @@ RUN apt-get install -y ansible
 COPY install-composer.sh /root/install-composer.sh
 RUN sh /root/install-composer.sh
 
+# install npm & gulp
+RUN apt-get install -y npm
+RUN npm install -g gulp
+
 # done
