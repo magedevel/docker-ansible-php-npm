@@ -24,7 +24,7 @@ RUN apt-get install -y unzip
 RUN apt-get install -y npm
 RUN npm install -g gulp
 
-# oh, we need git too...
-RUN apt-get install -y git
+# oh, we need git and the ssh client too...
+RUN apt-get install -y git openssh-client
 
 # done
