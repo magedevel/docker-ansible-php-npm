@@ -9,7 +9,8 @@ RUN apt-get update \
     unzip \
     iproute2 \
     libzip-dev \
-    libxslt1-dev
+    libxslt1-dev \
+    build-essential
 
 RUN docker-php-ext-configure \
   gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
