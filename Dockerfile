@@ -22,7 +22,8 @@ RUN docker-php-ext-install \
   mysqli \
   xsl \
   intl \
-  soap
+  soap \
+  opcache
 
 # install composer and "dependencies"
 RUN apt-get install -y wget unzip
