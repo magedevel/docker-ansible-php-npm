@@ -4,6 +4,17 @@ LABEL Maintainer="Luis Lopes <luis@bitok.pt>" \
 
 RUN apt-get update
 
+RUN docker-php-ext-configure \
+  gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+
+RUN docker-php-ext-install \
+  bcmath \
+  gd \
+  zip \
+  pdo_mysql \
+  mysqli \
+  opcache
+
 # install composer and "dependencies"
 RUN apt-get install -y wget unzip
 COPY install-composer.sh /root/install-composer.sh
