@@ -34,7 +34,7 @@ RUN sh /root/install-composer.sh
 # install npm & gulp
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash
 RUN apt-get install -y nodejs
-RUN npm install -g gulp
+RUN npm install -g gulp-cli
 
 # oh, we need git and the ssh client too...
 RUN apt-get install -y git openssh-client
@@ -43,5 +43,7 @@ RUN apt-get install -y git openssh-client
 RUN apt-get install -y ansible
 # clear apt cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 # done
