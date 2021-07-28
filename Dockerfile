@@ -1,31 +1,38 @@
-FROM php:7.3.19-cli
-LABEL Maintainer="Luis Lopes <luis@bitok.pt>" \
-      Description="Container with PHP 7.3 and Ansible for application deployments based on Ubuntu"
+FROM php:7.4.19-fpm
+LABEL Maintainer="Filippo Esposto <3innovaweb@gmail.com>" \
+      Description="Container with PHP 7.4 and Ansible for application deployments based on Ubuntu"
 
 RUN apt-get update \
   && apt-get install -y \
+    cron \
+    libjpeg-dev \
     libfreetype6-dev \
+    libicu-dev \
     libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libxslt1-dev \
+    libmagickwand-dev \
     unzip \
     iproute2 \
-    libzip-dev \
-    libxslt1-dev \
-    build-essential
+    sudo \
+    git \
+    libzip-dev
 
 RUN docker-php-ext-configure \
-  gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+  gd --with-freetype --with-jpeg
 
-RUN docker-php-ext-install \
+RUN docker-php-ext-install -j$(nproc)  \
   bcmath \
   gd \
-  zip \
-  pdo_mysql \
-  mysqli \
-  xsl \
   intl \
+  pdo_mysql \
   soap \
-  opcache
+  xsl \
+  zip \
+  opcache \
+  sockets
 
+RUN pecl install imagick
 # install composer and "dependencies"
 RUN apt-get install -y wget unzip
 COPY install-composer.sh /root/install-composer.sh
